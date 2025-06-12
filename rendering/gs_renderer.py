@@ -71,7 +71,7 @@ class GaussianSplattingRenderer(AbstractRenderer):
             render_mode="RGB",
             sh_degree=self.sh_degree,
             covars=covars,
-            backgrounds=torch.tensor([[1., 1., 1.]], device=self.device)
+            backgrounds=torch.ones(3, device=self.device)
         )
         render_rgbs = render_colors[0, ..., 0:3].cpu().numpy()
         color = (render_rgbs * 255).astype(np.uint8)

@@ -1,0 +1,21 @@
+name: vddf
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch=2.4
+  - pytorch-cuda=12.1
+  - torchvision
+  - numpy
+  - pip
+  - pip:
+      - jaxtyping
+      - libigl
+      - gpytoolbox
+      - triangle
+      - plyfile
+      - opencv-python
+      - pyrender
