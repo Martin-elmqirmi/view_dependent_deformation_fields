@@ -54,6 +54,10 @@ class BbwMesh:
 
         self.new_vertices_tensor = torch.from_numpy(self.new_vertices).type(torch.float32)
 
+        self.original_vertices = self.vertices.copy()
+        self.original_vertices_augmented = np.hstack(
+            (self.original_vertices, np.ones((self.original_vertices.shape[0], 1))))
+
         self.handles_index = np.array([])
         self.handles = []
         self.selected_handles_index = np.array([])
@@ -65,7 +69,7 @@ class BbwMesh:
     """ Compute the weight matrix based on the controllers (handles) """
     def compute_weight_matrix(self):
         identity_matrix = np.identity(len(self.handles))
-        self.weight_matrix = igl.bbw(self.vertices, self.faces, self.handles_index, identity_matrix)
+        self.weight_matrix = igl.bbw(self.original_vertices, self.faces, self.handles_index, identity_matrix)
 
         row_sums = np.clip(self.weight_matrix.sum(axis=1, keepdims=True), a_min=1, a_max=None)
         self.weight_matrix /= row_sums
@@ -104,7 +108,7 @@ class BbwMesh:
 
         # Get all the transformation matrices
         transformation_matrices = np.array([handle.get_transformation_matrix() for handle in self.handles])
-        transformed_points = np.einsum('mij,nj->mni', transformation_matrices, self.vertices_augmented)
+        transformed_points = np.einsum('mij,nj->mni', transformation_matrices, self.original_vertices_augmented)
 
         # Calculate new vertices based on the weight matrix
         result = self.weight_matrix[:, :, np.newaxis] * transformed_points.transpose(1, 0, 2)
