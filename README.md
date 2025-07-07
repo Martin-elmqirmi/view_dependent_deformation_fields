@@ -47,16 +47,15 @@ To generate a 2D mesh from a rendered image of a 3D model, we begin by detecting
 
 ## Rendering
 
-Our system supports two types of rendering backends: one for triangle meshes and another for 3D Gaussian splats. For mesh rendering, we use the `pyrender` library, chosen for its ease of use and quick setup for rendering 3D geometry. For Gaussian splats, we use the `gsplat` library, a high-performance renderer specifically designed for real-time visualization of Gaussian point-based models. While both libraries provide a solid starting point, each comes with trade-offs in terms of flexibility and performance, which are discussed below.
+Our system supports two types of rendering: triangle meshes and 3D Gaussian splats. Each uses a separate library, with different formats and rendering capabilities depending on the representation.
 
 ### Meshes
 
-We use the [pyrender](https://pyrender.readthedocs.io/en/latest/api/index.html#) library to render triangle meshes. It offers a simple and efficient API for visualizing 3D models using OpenGL, including camera control and background color customization. However, `pyrender` is not well-suited for dynamic updates to mesh geometry, such as frequent vertex displacement, which limits its performance in scenarios involving real-time deformation. Replacing it with a lower-level, GPU-accelerated rendering backend could significantly improve responsiveness and rendering speed in our deformation pipeline.
+We use [pyrender](https://pyrender.readthedocs.io/en/latest/api/index.html#) to render triangle meshes. It’s a simple and quick solution for visualizing 3D models with basic camera and background control. However, it’s not ideal for frequent updates to the mesh geometry, as performance can drop when modifying vertices often. Currently, we only support `.glb` mesh files.
 
 ### Gaussian Splats
 
-For rendering Gaussian splats, we use the [gsplat](https://docs.gsplat.studio/main/) library. This tool enables fast and high-quality rendering of 3D Gaussian point clouds, where each point is represented as a view-dependent anisotropic Gaussian. `gsplat` provides efficient GPU-based rendering and is well-adapted for neural representations and real-time visualization. Its design makes it a natural fit for projects that involve rendering large numbers of splats with complex appearance models. More implementation details and capabilities can be found in the official documentation.
-
+For Gaussian splat rendering, we use the [gsplat](https://docs.gsplat.studio/main/) library. It provides fast and high-quality rendering for 3D Gaussian splats and is well-suited for neural scene representations. The viewer accepts `.ply` files as input for splats.
 
 ## Information
 
