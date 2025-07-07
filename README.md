@@ -43,16 +43,20 @@
 - After building the library, install it in your Conda environment according to the instructions in the GSplat repo.
 
 ## Generation of the 2D mesh
-TODO
+To generate a 2D mesh from a rendered image of a 3D model, we begin by detecting the object's contour using OpenCV. This detection relies on a known background color, which can be adjusted in the rendering settings. When the background color changes, the threshold used in the contour detection must be updated accordingly to maintain accurate segmentation. Once the contour is extracted, we apply a triangulation algorithm using the triangle library. This triangulation is configurable: we can set constraints such as the maximum area of the triangles and the minimum angle allowed between their edges. In our configuration, we use a maximum triangle area of 60 pixels and enforce a minimum internal angle of 32.5 degrees to ensure a well-shaped and uniform triangulation of the detected region.
 
 ## Rendering
-TODO
+
+Our system supports two types of rendering backends: one for triangle meshes and another for 3D Gaussian splats. For mesh rendering, we use the `pyrender` library, chosen for its ease of use and quick setup for rendering 3D geometry. For Gaussian splats, we use the `gsplat` library, a high-performance renderer specifically designed for real-time visualization of Gaussian point-based models. While both libraries provide a solid starting point, each comes with trade-offs in terms of flexibility and performance, which are discussed below.
 
 ### Meshes
-TODO
+
+We use the [pyrender](https://pyrender.readthedocs.io/en/latest/api/index.html#) library to render triangle meshes. It offers a simple and efficient API for visualizing 3D models using OpenGL, including camera control and background color customization. However, `pyrender` is not well-suited for dynamic updates to mesh geometry, such as frequent vertex displacement, which limits its performance in scenarios involving real-time deformation. Replacing it with a lower-level, GPU-accelerated rendering backend could significantly improve responsiveness and rendering speed in our deformation pipeline.
 
 ### Gaussian Splats
-TODO
+
+For rendering Gaussian splats, we use the [gsplat](https://docs.gsplat.studio/main/) library. This tool enables fast and high-quality rendering of 3D Gaussian point clouds, where each point is represented as a view-dependent anisotropic Gaussian. `gsplat` provides efficient GPU-based rendering and is well-adapted for neural representations and real-time visualization. Its design makes it a natural fit for projects that involve rendering large numbers of splats with complex appearance models. More implementation details and capabilities can be found in the official documentation.
+
 
 ## Information
 
