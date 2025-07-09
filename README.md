@@ -61,5 +61,5 @@ The viewer accepts `.ply` files as input for splats. To use them, place your fil
 
 ## Information
 
-If you encounter any bugs, have questions, or simply want to discuss the project, please feel free to reach out to me at [martin.elmqirmi@umontreal.ca](mailto:martin.el.mqirmi@umontreal.ca). I’m happy to help and would love to hear your feedback!
+If you encounter any bugs, have questions, or simply want to discuss the project, please feel free to reach out to me at [martin.el.mqirmi@umontreal.ca](mailto:martin.el.mqirmi@umontreal.ca). I’m happy to help and would love to hear your feedback!
 
