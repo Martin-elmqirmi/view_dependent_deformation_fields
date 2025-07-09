@@ -51,13 +51,15 @@ Our system supports two types of rendering: triangle meshes and 3D Gaussian spla
 
 ### Meshes
 
-We use [pyrender](https://pyrender.readthedocs.io/en/latest/api/index.html#) to render triangle meshes. It’s a simple and quick solution for visualizing 3D models with basic camera and background control. However, it’s not ideal for frequent updates to the mesh geometry, as performance can drop when modifying vertices often. Currently, we only support `.glb` mesh files.
+We use [pyrender](https://pyrender.readthedocs.io/en/latest/api/index.html#) to render triangle meshes. It’s a simple and quick solution for visualizing 3D models with basic camera and background control. However, it’s not ideal for frequent updates to the mesh geometry, as performance can drop when modifying vertices often.  
+Currently, we only support `.glb` mesh files. To use them, place your files in the `models/meshes` directory.
 
 ### Gaussian Splats
 
-For Gaussian splat rendering, we use the [gsplat](https://docs.gsplat.studio/main/) library. It provides fast and high-quality rendering for 3D Gaussian splats and is well-suited for neural scene representations. The viewer accepts `.ply` files as input for splats.
+For Gaussian splat rendering, we use the [gsplat](https://docs.gsplat.studio/main/) library. It provides fast and high-quality rendering for 3D Gaussian splats and is well-suited for neural scene representations.  
+The viewer accepts `.ply` files as input for splats. To use them, place your files in the `models/gsplat` directory.
 
 ## Information
 
-If you encounter any bugs, have questions, or simply want to discuss the project, please feel free to reach out to me at [martin.elmqirmi@umontreal.ca](mailto:martin.elmqirmi@umontreal.ca). I’m happy to help and would love to hear your feedback!
+If you encounter any bugs, have questions, or simply want to discuss the project, please feel free to reach out to me at [martin.elmqirmi@umontreal.ca](mailto:martin.el.mqirmi@umontreal.ca). I’m happy to help and would love to hear your feedback!
 
