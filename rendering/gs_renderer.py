@@ -124,7 +124,7 @@ class GaussianSplattingRenderer(AbstractRenderer):
 
     """ Get the 2D projected means of the actual view-dependent 3DGS model """
     def get_points2d(self, view_deformer: GsplatViewDeformer, camera: GsplatCamera):
-        initial_means = self.means
+        initial_means = self.means.clone()
         if len(view_deformer.view_deformations) > 0:
             displacements, _ = view_deformer.get_interpolated_values(camera,
                                                                      len(view_deformer.view_deformations) - 1,

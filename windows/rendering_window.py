@@ -144,6 +144,7 @@ class RenderingWindow:
     def show_2d_mesh(self):
         print("show_2d_mesh!")
         self.manager.show_mesh = not self.manager.show_mesh
+        self.update()
 
     """ Create a new view deformation """
     def new_view_deformation(self):

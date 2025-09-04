@@ -27,7 +27,7 @@ class MeshViewDeformation(AbstractViewDeformation):
             triangles = self.bbw_mesh_tool.get_triangles('cuda')
 
              # Compute the displacement for the 2D vertices
-            displacements =  torch.sum(self.bbw_mesh_tool.barycentric_coordinates * triangles, dim=1) - points2d
+            displacements = torch.sum(self.bbw_mesh_tool.barycentric_coordinates * triangles, dim=1) - points2d
 
             points2d += displacements
 

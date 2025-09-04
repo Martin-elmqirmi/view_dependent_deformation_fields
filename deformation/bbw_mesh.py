@@ -46,6 +46,8 @@ class BbwMesh:
     def __init__(self, image):
         self.old_angle = 0
 
+        self.bbw = igl.BBW()
+
         self.vertices, self.faces = get_contour_mesh(image)
         self.vertices_augmented = np.hstack((self.vertices.copy(), np.ones((self.vertices.shape[0], 1))))
         self.new_vertices = self.vertices.copy()
@@ -69,7 +71,7 @@ class BbwMesh:
     """ Compute the weight matrix based on the controllers (handles) """
     def compute_weight_matrix(self):
         identity_matrix = np.identity(len(self.handles))
-        self.weight_matrix = igl.bbw(self.original_vertices, self.faces, self.handles_index, identity_matrix)
+        self.weight_matrix = self.bbw.solve(self.original_vertices, self.faces, self.handles_index, identity_matrix)
 
         row_sums = np.clip(self.weight_matrix.sum(axis=1, keepdims=True), a_min=1, a_max=None)
         self.weight_matrix /= row_sums

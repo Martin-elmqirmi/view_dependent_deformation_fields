@@ -25,6 +25,7 @@ class GsplatViewDeformation(AbstractViewDeformation):
     def save_view_deformation(self, displacement_vectors, jacobians=None):
         self.displacements = displacement_vectors
         self.jacobians = jacobians
+        print(displacement_vectors)
 
     """ Deform the 2D points based on the 2D mesh associated with this view deformation """
     def deform(self, points2d):
