@@ -43,18 +43,23 @@
 - After building the library, install it in your Conda environment according to the instructions in the GSplat repo.
 
 ## Generation of the 2D mesh
-TODO
+To generate a 2D mesh from a rendered image of a 3D model, we begin by detecting the object's contour using [OpenCV](https://docs.opencv.org/4.x/). This detection relies on a known background color, which can be adjusted in the rendering settings. When the background color changes, the threshold used in the contour detection must be updated accordingly to maintain accurate segmentation. Once the contour is extracted, we apply a triangulation algorithm using the [Triangle](https://rufat.be/triangle/) library. This triangulation is configurable: we can set constraints such as the maximum area of the triangles and the minimum angle allowed between their edges. In our configuration, we use a maximum triangle area of 60 pixels and enforce a minimum internal angle of 32.5 degrees to ensure a well-shaped and uniform triangulation of the detected region.
 
 ## Rendering
-TODO
+
+Our system supports two types of rendering: triangle meshes and 3D Gaussian splats. Each uses a separate library, with different formats and rendering capabilities depending on the representation.
 
 ### Meshes
-TODO
+
+We use [pyrender](https://pyrender.readthedocs.io/en/latest/api/index.html#) to render triangle meshes. It’s a simple and quick solution for visualizing 3D models with basic camera and background control. However, it’s not ideal for frequent updates to the mesh geometry, as performance can drop when modifying vertices often.  
+Currently, we only support `.glb` mesh files. To use them, place your files in the `models/meshes` directory.
 
 ### Gaussian Splats
-TODO
+
+For Gaussian splat rendering, we use the [gsplat](https://docs.gsplat.studio/main/) library. It provides fast and high-quality rendering for 3D Gaussian splats and is well-suited for neural scene representations.  
+The viewer accepts `.ply` files as input for splats. To use them, place your files in the `models/gsplat` directory.
 
 ## Information
 
-If you encounter any bugs, have questions, or simply want to discuss the project, please feel free to reach out to me at [martin.elmqirmi@umontreal.ca](mailto:martin.elmqirmi@umontreal.ca). I’m happy to help and would love to hear your feedback!
+If you encounter any bugs, have questions, or simply want to discuss the project, please feel free to reach out to me at [martin.el.mqirmi@umontreal.ca](mailto:martin.el.mqirmi@umontreal.ca). I’m happy to help and would love to hear your feedback!
 
