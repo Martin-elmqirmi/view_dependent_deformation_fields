@@ -1,4 +1,4 @@
-# view Dependent Deformation Fields for 2D Editing of 3D Models
+# View Dependent Deformation Fields for 2D Editing of 3D Models
 
 [Project Page](https://martin-elmqirmi.github.io/view_dependent_deformation_fields_project_page/)
 
